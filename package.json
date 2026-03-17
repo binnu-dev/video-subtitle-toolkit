@@ -1,0 +1,8 @@
+{
+  "name": "video-subtitle-toolkit",
+  "version": "1.0.0",
+  "description": "CDP video URL capture for X(Twitter) — requires 'ws' package",
+  "dependencies": {
+    "ws": "^8.18.0"
+  }
+}

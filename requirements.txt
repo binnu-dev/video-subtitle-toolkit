@@ -1,0 +1,2 @@
+yt-dlp>=2024.11.18
+openai-whisper>=20231117
