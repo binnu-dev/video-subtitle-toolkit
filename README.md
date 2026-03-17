@@ -6,6 +6,74 @@ Download videos from YouTube / X(Twitter), generate bilingual (Korean + English)
 
 ---
 
+## 📥 Installation
+
+SKILL.md is based on the [Agent Skills Open Standard](https://github.com/anthropics/agent-skills-spec) and works natively across 14+ AI coding tools.
+
+### Tier 1 — Native SKILL.md support (works as-is)
+
+| Tool | Install Path |
+|------|-------------|
+| **VS Code Copilot** | `.github/skills/` (per-project) or `~/.claude/skills/` (global) |
+| **Claude Code** | `~/.claude/skills/` (global) |
+| **Codex CLI / Gemini CLI / Kiro / Antigravity** | `~/.agents/skills/` (universal) |
+| **Goose** | `~/.config/goose/skills/` |
+| **OpenCode** | `~/.config/opencode/skills/` |
+
+### Tier 2 — Auto-adapted (installer converts format)
+
+| Tool | Install Path | Format |
+|------|-------------|--------|
+| **Cursor** | `.cursor/rules/` | `.mdc` |
+| **Windsurf** | `.windsurf/rules/` | `.md` rules |
+| **Cline** | `.clinerules/` | plain markdown |
+| **Roo Code** | `.roo/rules/` | plain markdown |
+| **Trae** | `.trae/rules/` | plain markdown |
+
+---
+
+### Quick Install
+
+```bash
+# VS Code Copilot (per-project)
+npx degit binnu-dev/video-subtitle-toolkit .github/skills/video-subtitle-toolkit
+
+# Claude Code + VS Code Copilot (global — works in all projects)
+git clone https://github.com/binnu-dev/video-subtitle-toolkit.git ~/.claude/skills/video-subtitle-toolkit
+
+# Codex CLI / Gemini CLI / Kiro / Antigravity (universal path)
+git clone https://github.com/binnu-dev/video-subtitle-toolkit.git ~/.agents/skills/video-subtitle-toolkit
+
+# Cursor (per-project)
+git clone https://github.com/binnu-dev/video-subtitle-toolkit.git .cursor/rules/video-subtitle-toolkit
+
+# Windsurf (per-project)
+git clone https://github.com/binnu-dev/video-subtitle-toolkit.git .windsurf/rules/video-subtitle-toolkit
+
+# Kiro (per-project)
+git clone https://github.com/binnu-dev/video-subtitle-toolkit.git .kiro/skills/video-subtitle-toolkit
+```
+
+> **Cursor / Windsurf 사용자**: SKILL.md frontmatter는 그냥 무시되고 본문만 rules로 읽혀요. 따로 변환 불필요.
+
+### Update
+
+```bash
+cd ~/.claude/skills/video-subtitle-toolkit && git pull
+# 또는
+cd ~/.agents/skills/video-subtitle-toolkit && git pull
+```
+
+---
+
+## 🖼️ Preview
+
+![Bilingual Subtitle Preview](docs/preview.png)
+
+*한국어(상단 굵게) + 영어(하단 얇게) 이중자막 스타일 — v6 최종 승인 스타일*
+
+---
+
 ## ✨ Features
 
 - **YouTube 다운로드** — yt-dlp로 최대 1080p 다운로드
@@ -17,7 +85,7 @@ Download videos from YouTube / X(Twitter), generate bilingual (Korean + English)
 
 ---
 
-## 📦 Prerequisites
+## 📦 Prerequisites (Dependencies)
 
 | Tool | Install |
 |------|---------|

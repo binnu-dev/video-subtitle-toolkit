@@ -1,11 +1,14 @@
 ---
 name: video-subtitle-toolkit
 description: >-
-  YouTube / X(Twitter) 영상 다운로드 + 이중자막(한/영) 생성 및 번인 워크플로우.
+  YouTube / X(Twitter) 영상을 다운로드하고, 한국어+영어 이중자막을 생성해 영상에 번인하는 워크플로우.
+  Download videos from YouTube / X(Twitter), generate bilingual (Korean + English) subtitles,
+  and burn them into the video using yt-dlp, Whisper, and ffmpeg.
   "유튜브 자막 넣어줘", "이중자막 만들어줘", "bilingual subtitles", "영상 다운로드",
   "X 영상 저장", "Whisper 전사", "자막 번인", "subtitle burn-in",
   "VTT 자막 추출", "SRT to ASS" 등의 요청에 활성화됩니다.
-applyTo: "**"
+skill-type: encoded-preference
+argument-hint: [YouTube/X URL 또는 작업 설명]
 ---
 
 # 🎬 Video Subtitle Toolkit

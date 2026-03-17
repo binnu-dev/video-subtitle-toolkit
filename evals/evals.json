@@ -1,0 +1,61 @@
+{
+  "skill_name": "video-subtitle-toolkit",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "https://www.youtube.com/watch?v=dQw4w9WgXcQ 이 영상에 한영 이중자막 넣어줘",
+      "expected_output": "YouTube 영상 다운로드 → VTT 자막 추출 → 문장 단위 JSON 생성 → 이중자막 SRT 작성 → ASS 변환 → ffmpeg 번인까지 6단계 워크플로우를 순서대로 실행한다.",
+      "files": [],
+      "assertions": [
+        {
+          "name": "workflow-a-6-steps-followed",
+          "description": "Step 1(다운로드) → Step 2(VTT) → Step 3(extract_by_sentence.py) → Step 4(SRT) → Step 5(gen_ass.py) → Step 6(ffmpeg 번인) 순서를 지킨다."
+        },
+        {
+          "name": "uses-bundled-scripts",
+          "description": "extract_by_sentence.py와 gen_ass.py를 직접 재작성하지 않고 scripts/ 번들 스크립트를 참조하여 실행한다."
+        },
+        {
+          "name": "ffmpeg-temp-path-workaround",
+          "description": "ffmpeg 번인 시 $env:TEMP\\subs_burn 임시 경로로 복사 후 실행하는 단계를 포함한다."
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "https://x.com/elonmusk/status/1234567890 이 트위터 영상 다운로드해서 한국어 자막 달아줘",
+      "expected_output": "X(Twitter) CDP 캡처 방식으로 영상 URL을 획득하고, Whisper로 음성을 전사한 뒤 한영 이중자막을 생성해 번인한다.",
+      "files": [],
+      "assertions": [
+        {
+          "name": "uses-cdp-capture-for-twitter",
+          "description": "yt-dlp 직접 다운로드가 아니라 capture_video_url.js CDP 방식을 먼저 시도한다."
+        },
+        {
+          "name": "whisper-transcription-step-included",
+          "description": "자막이 없는 영상이므로 Whisper 전사(audio.wav 추출 → whisper.load_model) 단계를 포함한다."
+        },
+        {
+          "name": "workflow-b-order-followed",
+          "description": "Step B1(CDP 다운로드) → Step B2(Whisper 전사) → Step B3(번역+SRT) → Step B4~5(ASS+번인) 순서를 지킨다."
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "방금 다운받은 영상 클립으로 잘라서 자막 넣어줘. 1:30부터 3:45까지만",
+      "expected_output": "ffmpeg로 해당 구간을 먼저 클립으로 잘라낸 뒤, 잘린 클립에 이중자막 워크플로우를 적용한다.",
+      "files": [],
+      "assertions": [
+        {
+          "name": "clip-before-subtitle",
+          "description": "ffmpeg -ss 00:01:30 -to 00:03:45 -c copy 명령으로 클립을 먼저 추출한 후 자막 작업을 진행한다."
+        },
+        {
+          "name": "extract-by-sentence-uses-correct-range",
+          "description": "extract_by_sentence.py 실행 시 --start, --end 파라미터에 클립 범위(0~135초)를 올바르게 지정한다."
+        }
+      ]
+    }
+  ]
+}
